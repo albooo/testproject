@@ -84,9 +84,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  testRunner.When("I select Ноутбуки subsection in Компьютеры section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 7
- testRunner.And("I fill in Производитель filter with Lenovo value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 8
  testRunner.And("I set prices range from 700 to 1500", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 8
+ testRunner.And("I fill in Производитель filter with Lenovo value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
  testRunner.And("Apply entered filter values", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10

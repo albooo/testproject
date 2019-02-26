@@ -1,12 +1,10 @@
-﻿using CommonProject.Helpers;
-using CommonProjeect.Wrappers;
+﻿using System.Collections.Generic;
+using CommonProject.Wrappers;
 using OpenQA.Selenium;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace TestProject.PageObjects
 {
-    class Catalog
+    public class Catalog
     {
         private readonly By _catalogLocator = By.Id("Catalog");
         private readonly By _sectionLinkLocator = By.XPath("//span[@data-level = '1']//a");
@@ -21,7 +19,7 @@ namespace TestProject.PageObjects
         {
             get
             {
-                return new Element(_sectionLinkLocator).FindAllElements();
+                return new Element(_catalogLocator).FindAllChildElements(_sectionLinkLocator);
             }
         }
 
@@ -29,7 +27,7 @@ namespace TestProject.PageObjects
         {
             get
             {
-                return new Element(_subSectionLinkLocator).FindAllElements();
+                return new Element(_catalogLocator).FindAllChildElements(_subSectionLinkLocator);
             }
         }
     }

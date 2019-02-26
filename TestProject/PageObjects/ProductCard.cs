@@ -1,7 +1,7 @@
-﻿using CommonProjeect.Wrappers;
-using OpenQA.Selenium;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using CommonProject.Wrappers;
+using OpenQA.Selenium;
 
 namespace TestProject.PageObjects
 {
@@ -11,8 +11,7 @@ namespace TestProject.PageObjects
         private readonly By _productDescriptionLocator = By.XPath(".//div[@class = 'ModelList__DescBlock']");
         private readonly By _productPriceLocator = By.XPath(".//span[@class = 'PriceBlock__PriceValue']/span");
 
-        private readonly Element _productCard;
-        private IEnumerable<Element> _productPrices;
+        private readonly IEnumerable<Element> _productPrices;
 
         public string ProductName
         {
@@ -42,10 +41,10 @@ namespace TestProject.PageObjects
 
         public ProductCard(Element card)
         {
-            _productCard = card;
-            _productPrices = _productCard.FindAllChildElements(_productPriceLocator);
-            ProductName = _productCard.FindElement(_productNameLocator).Text;
-            ProductDescription = _productCard.FindElement(_productDescriptionLocator).Text;
+            var productCard = card;
+            _productPrices = productCard.FindAllChildElements(_productPriceLocator);
+            ProductName = productCard.FindElement(_productNameLocator).Text;
+            ProductDescription = productCard.FindElement(_productDescriptionLocator).Text;
         }
     }
 }

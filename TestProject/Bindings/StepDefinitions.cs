@@ -1,9 +1,8 @@
-﻿using CommonProject.Helpers;
-using CommonProjeect;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using CommonProject;
+using CommonProject.Helpers;
+using NUnit.Framework;
 using TechTalk.SpecFlow;
 using TestProject.Models;
 using TestProject.PageObjects;
@@ -13,7 +12,7 @@ namespace TestProject.Bindings
     [Binding]
     public sealed class StepDefinitions
     {
-        private static List<SearchCriteria> _criteriaList = new List<SearchCriteria>();
+        private static readonly List<SearchCriteria> _criteriaList = new List<SearchCriteria>();
         
         [Given(@"Market main page displayed")]
         public void GivenMarketMainPageDisplayed()
@@ -32,7 +31,7 @@ namespace TestProject.Bindings
         [When(@"I fill in (.*) filter with (.*) value")]
         public void SetFilterValue(string parameter, string value)
         {
-            var filterBlock = new FilterBlock();
+            new FilterBlock();
             var parameterFilterBlock = new CheckboxesFilterParameterBlock(parameter);
             parameterFilterBlock.SetFilterValue(value);
             AddSearchCriteria(parameter, value);
@@ -41,7 +40,7 @@ namespace TestProject.Bindings
         [When(@"I set prices range from (.*) to (.*)")]
         public void SetPricesRange(decimal minPrice, decimal maxPrice)
         {
-            var filterBlock = new FilterBlock
+            new FilterBlock
             {
                 MinPrice = minPrice,
                 MaxPrice = maxPrice
@@ -71,7 +70,7 @@ namespace TestProject.Bindings
             }
         }
 
-        private void AddSearchCriteria(string parameter, string value)
+        private static void AddSearchCriteria(string parameter, string value)
         {
             switch (parameter)
             {

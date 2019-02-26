@@ -1,13 +1,9 @@
-﻿using CommonProject.Helpers;
-using CommonProjeect.Wrappers;
+﻿using CommonProject.Wrappers;
 using OpenQA.Selenium;
-using System.Collections.Generic;
-using System.Linq;
-using TestProject.Models;
 
 namespace TestProject.PageObjects
 {
-    class FilterBlock
+    public class FilterBlock
     {
         private readonly By _minPriceLocator = By.XPath("//input[@name = 'price_before']");
         private readonly By _maxPriceLocator = By.XPath("//input[@name = 'price_after']");

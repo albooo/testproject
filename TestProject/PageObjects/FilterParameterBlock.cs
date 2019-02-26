@@ -1,17 +1,15 @@
-﻿using CommonProjeect.Wrappers;
+﻿using CommonProject.Wrappers;
 using OpenQA.Selenium;
 
-namespace TestProject.Models
+namespace TestProject.PageObjects
 {
-    abstract class FilterParameterBlock
+    public abstract class FilterParameterBlock
     {
-        protected Element _header;
+        protected readonly Element _block;
 
-        protected Element _block;
-
-        public abstract void SetFilterValue(object parameterValue);
-
-        public FilterParameterBlock(string parameterName)
+        private readonly Element _header;
+        
+        protected FilterParameterBlock(string parameterName)
         {
             _block = new Element(By.XPath(
                 $"//span[@class = 'ModelFilter__ParamName' and text() = '{parameterName}']/ancestor::div[contains(@class, 'ModelFilter__TipAttrWapper')]"));

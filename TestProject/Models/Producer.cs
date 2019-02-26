@@ -2,9 +2,9 @@
 
 namespace TestProject.Models
 {
-    class Producer : SearchCriteria
+    public class Producer : SearchCriteria
     {
-        private string _producer;
+        private readonly string _producer;
 
         public Producer(string value)
         {

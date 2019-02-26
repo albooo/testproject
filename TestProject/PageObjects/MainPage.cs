@@ -1,9 +1,9 @@
-﻿using CommonProjeect.Wrappers;
+﻿using CommonProject.Wrappers;
 using OpenQA.Selenium;
 
 namespace TestProject.PageObjects
 {
-    class MainPage
+    public class MainPage
     {
         private readonly By _mainPageBodyLocator = By.XPath("//body[@data-page = 'main']");
 
