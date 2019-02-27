@@ -1,48 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
-using TechTalk.SpecFlow;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using static TechTalk.SpecFlow.ScenarioContext;
 
 namespace CommonProject.Wrappers
 {
-    public sealed class Element
+    public class Element
     {
-        private readonly IWebElement _element;
+        protected IWebElement _element;
 
-        private By _selector;
+        protected By _selector;
 
         public Element(By selector)
         {
             _selector = selector;
-            _element = new WebDriverWait(ScenarioContext.Current.Get<IWebDriver>(), TimeSpan.FromSeconds(GlobalSettings.Timeout))
+            _element = new WebDriverWait(Current.Get<IWebDriver>(), TimeSpan.FromSeconds(GlobalSettings.Timeout))
                 .Until(ExpectedConditions.ElementExists(selector));
         }
 
-        private Element(IWebElement element)
+        protected Element(IWebElement element)
         {
             _element = element;
         }
 
         public void WaitForElementVisibility()
         {
-            new WebDriverWait(ScenarioContext.Current.Get<IWebDriver>(), TimeSpan.FromSeconds(GlobalSettings.Timeout)).Until(d => _element.Displayed);
+            new WebDriverWait(Current.Get<IWebDriver>(), TimeSpan.FromSeconds(GlobalSettings.Timeout)).Until(d => _element.Displayed);
         }
 
         public void WaitForElementEnabling()
         {
-            new WebDriverWait(ScenarioContext.Current.Get<IWebDriver>(), TimeSpan.FromSeconds(GlobalSettings.Timeout)).Until(d => _element.Enabled);
+            new WebDriverWait(Current.Get<IWebDriver>(), TimeSpan.FromSeconds(GlobalSettings.Timeout)).Until(d => _element.Enabled);
         }
 
-        public IEnumerable<Element> FindAllElements()
+        public virtual IEnumerable<Element> FindAllElements()
         {
-            return ScenarioContext.Current.Get<IWebDriver>().FindElements(_selector).Select(e => new Element(e));
+            return Current.Get<IWebDriver>().FindElements(_selector).Select(e => new Element(e));
         }
 
-        public IEnumerable<Element> FindAllChildElements(By selector)
+        public virtual IEnumerable<Element> FindAllChildElements(By selector)
         {
             return _element.FindElements(selector).Select(e => new Element(e));
         }
@@ -71,34 +71,31 @@ namespace CommonProject.Wrappers
 
         public void Select()
         {
-            if (_element.Selected)
-            {
-                return;
-            }
+            if (_element.Selected) return;
             Click();
         }
 
-        public void Hover()
+        public virtual void Hover()
         {
-            var actions = new Actions(ScenarioContext.Current.Get<IWebDriver>());
+            var actions = new Actions(Current.Get<IWebDriver>());
             actions.MoveToElement(_element);
             actions.Perform();
         }
 
-        public void Click()
+        public virtual void Click()
         {
             WaitForElementEnabling();
             WaitForElementVisibility();
             _element.Click();
         }
 
-        public void SendKeys(string value)
+        public virtual void SendKeys(string value)
         {
             WaitForElementEnabling();
             _element.SendKeys(value);
         }
 
-        public void SendKeys(decimal value)
+        public virtual void SendKeys(decimal value)
         {
             WaitForElementEnabling();
             _element.SendKeys(value.ToString());

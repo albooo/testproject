@@ -100,9 +100,8 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\CommonProjeect\CommonProject.csproj">
+    <ProjectReference Include="..\CommonProject\CommonProject.csproj">
       <Project>{a05b3576-e8d1-42f1-a313-506420f0ae61}</Project>
       <Name>CommonProject</Name>
     </ProjectReference>
